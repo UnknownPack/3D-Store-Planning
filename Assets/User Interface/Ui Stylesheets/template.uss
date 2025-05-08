@@ -1,0 +1,28 @@
+.btn {
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
+
+.btn:hover {
+    background-color: rgb(200, 200, 200);
+    border-left-color: rgb(124, 255, 144);
+    border-right-color: rgb(124, 255, 144);
+    border-top-color: rgb(124, 255, 144);
+    border-bottom-color: rgb(124, 255, 144);
+    color: rgb(125, 255, 145);
+}

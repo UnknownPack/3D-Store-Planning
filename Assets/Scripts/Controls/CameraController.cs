@@ -145,8 +145,8 @@ public class CameraController : MonoBehaviour
     void ManageSelectedObject()
     {
         if (currentSelectedObject == null)
-            return; 
-
+            return;  
+        
         if(bObjectManipulation)
         {  
             currentSelectedObject.transform.Rotate(Vector3.up, rotateInput.x * incrament, Space.World);
