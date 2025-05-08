@@ -2,7 +2,7 @@
     "name": "inputSystem",
     "maps": [
         {
-            "name": "camera",
+            "name": "UserInput",
             "id": "4f98e667-b9f8-4fc2-9e6d-7896b6024d1d",
             "actions": [
                 {
@@ -37,6 +37,24 @@
                     "type": "PassThrough",
                     "id": "d4689b1e-3dab-4780-8be8-74bfede8c288",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NodeGuidance",
+                    "type": "Button",
+                    "id": "d8a86986-39a2-42ee-a38f-611e93acceb1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ObjectSpecific",
+                    "type": "Button",
+                    "id": "1fcbe4dc-a78c-4150-ad8f-72e2c7242cd5",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -121,28 +139,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "92dddbf8-8990-4675-9590-dca5ae251854",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Height",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "0b7589f1-6a30-4114-9ee2-5c6292e71470",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Height",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "2D Vector",
                     "id": "d1672431-bdb7-4020-b388-7932253011b5",
                     "path": "2DVector",
@@ -196,6 +192,28 @@
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "49747c0c-aff9-4108-bdcc-f713f8d5494d",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NodeGuidance",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c25b2261-b7b5-48a3-b699-755fb68ef6d2",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ObjectSpecific",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
