@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float tiltRange  = 75f;
     [SerializeField] private float incrament  = 1f;
     [SerializeField] private LayerMask floorlayer;
+    [SerializeField] public Material highlightMaterial;
 
     private PlayerInput playerInput;
     UiManager uiManager;
@@ -26,8 +27,10 @@ public class CameraController : MonoBehaviour
     #region Input fields 
         private InputAction objectSpecificAction;
         private GameObject currentSelectedObject;
+        private MeshRenderer currentSelectedObject_MeshRenderer;
         private Vector3 currentMousePositionToWorld;
-        private bool bObjectManipulation = false, bIncramentalChange = false, draggingGameObject = false;
+        private Material copy;
+        private bool bObjectManipulation = false, bIncramentalChange = false, draggingGameObject = false, placementMode  = false;
     #endregion
  
 
@@ -106,6 +109,8 @@ public class CameraController : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * floorHit.distance, Color.green);
         }
 
+        if(placementMode)
+            return;
         // select object
         if (Input.GetMouseButtonDown(0))
         {
@@ -116,10 +121,15 @@ public class CameraController : MonoBehaviour
                 {
                     currentSelectedObject = hit.collider.gameObject;
                     uiManager.SetSelectableObject(hit.collider.gameObject);
-                    draggingGameObject = true;  
+                    draggingGameObject = true;
+                    currentSelectedObject_MeshRenderer = currentSelectedObject.GetComponent<MeshRenderer>();
+                    copy = currentSelectedObject_MeshRenderer.material;
+                    currentSelectedObject_MeshRenderer.material = highlightMaterial;
                 }
                 else
                 {
+                    if (currentSelectedObject_MeshRenderer != null)
+                        currentSelectedObject_MeshRenderer.material = copy;
                     uiManager.SetSelectableObject(null);
                     currentSelectedObject = null;
                     draggingGameObject = false;
@@ -130,18 +140,22 @@ public class CameraController : MonoBehaviour
         // drag object if left mouse held down
         if (Input.GetMouseButton(0) && draggingGameObject && currentSelectedObject != null)
         {
-            currentSelectedObject.transform.position = new Vector3(currentMousePositionToWorld.x, 1f, currentMousePositionToWorld.z);
+            currentSelectedObject.transform.position = new Vector3(currentMousePositionToWorld.x, currentSelectedObject.transform.localScale.y / 2, currentMousePositionToWorld.z);
         }
 
         // On release of left mouse, stop dragging
         if (Input.GetMouseButtonUp(0))
         {
             draggingGameObject = false;
+            if (currentSelectedObject_MeshRenderer != null)
+                currentSelectedObject_MeshRenderer.material = copy;
         }
 
         // right click to deselect
         if (Input.GetMouseButtonDown(1))
         {
+            if (currentSelectedObject_MeshRenderer != null)
+                currentSelectedObject_MeshRenderer.material = copy;
             currentSelectedObject = null;
             draggingGameObject = false;
         }
@@ -154,24 +168,29 @@ public class CameraController : MonoBehaviour
             return;  
         
         if(bObjectManipulation)
-        {  
             currentSelectedObject.transform.Rotate(Vector3.up, rotateInput.x * incrament, Space.World);
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                currentSelectedObject.transform.rotation = Quaternion.identity;
-            }
-
-            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
-            {
-                //Instantiate()
-            }
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentSelectedObject.transform.rotation = Quaternion.identity;
         }
-            
+
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            if (currentSelectedObject_MeshRenderer != null)
+                currentSelectedObject_MeshRenderer.material = copy;
+            uiManager.SetSelectableObject(null);
+            Destroy(currentSelectedObject);
+            currentSelectedObject = null;
+            draggingGameObject = false;
+        }
     }
     public GameObject CurrentSelectedObject { get { return currentSelectedObject; } }
     public LayerMask GetFloorMask(){return floorlayer;}
     public void SetSelectedObject(GameObject obj){currentSelectedObject = obj;}
- 
+
+    public void SetPlacementMode(bool mode){placementMode = mode;}
+
 }
 
 

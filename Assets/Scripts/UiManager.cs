@@ -8,9 +8,10 @@ public class UiManager : MonoBehaviour
     public List<GameObject> Prefabs = new List<GameObject>();
     public VisualTreeAsset btnTemplate;
     public VisualTreeAsset inspectorTemplate;
-    private GameObject selectedObject = null;
-    private GameObject lastInspectedObject = null;
-
+    private GameObject selectedObject = null, lastInspectedObject = null, potentialGameObject = null;
+    private MeshRenderer potentialGameObject_MeshRenderer = null;
+    private Material potentialGameObject_Material = null;
+    private bool inPlacementMode = false;
     private UIDocument uiDocument;
     private CameraController cameraController;
     private ListView listView;
@@ -48,8 +49,13 @@ public class UiManager : MonoBehaviour
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, cameraController.GetFloorMask()))
                 {
-                    GameObject newGameObject = Instantiate(Prefabs[i], hit.point, Quaternion.identity);
-                    cameraController.SetSelectedObject(newGameObject);
+                    potentialGameObject = Instantiate(Prefabs[i], hit.point, Quaternion.identity);
+                    potentialGameObject_MeshRenderer = potentialGameObject.GetComponent<MeshRenderer>();
+                    potentialGameObject_Material = potentialGameObject_MeshRenderer.material;
+                    potentialGameObject_MeshRenderer.material = cameraController.highlightMaterial;
+                    inPlacementMode = true;
+                    cameraController.SetPlacementMode(true);
+                    //cameraController.SetSelectedObject(newGameObject);
                 } 
             };
         };
@@ -62,6 +68,22 @@ public class UiManager : MonoBehaviour
 
     void Update()
     {
+        if (inPlacementMode)
+        {
+            Ray clickRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(clickRay, out RaycastHit hit, Mathf.Infinity, cameraController.GetFloorMask()))
+            {
+                Vector3 heighOffset = new Vector3(0, potentialGameObject.transform.localScale.y / 2, 0);
+                potentialGameObject.transform.position = hit.point + heighOffset;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    potentialGameObject = null;
+                    potentialGameObject_MeshRenderer.material = potentialGameObject_Material;
+                    cameraController.SetPlacementMode(false);
+                    inPlacementMode = false;
+                }
+            }
+        }
         if (selectedObject != null)
             ManageBasicInspector(selectedObject); 
     }
@@ -75,11 +97,11 @@ public class UiManager : MonoBehaviour
         inspectorContainer.Add(clonedRoot);  
         Label objNameLabel = inspectorContainer.Q<Label>("objName");
         objNameLabel.text = selected.name;
-        
+        var root = inspectorContainer.Q("ins");
         Debug.Log(inspectorContainer.Children().ToList().Count);
         for (int i = 1; i < 4; i++)
         {
-            VisualElement floatContainer = inspectorContainer.Children().ElementAt(i);
+            VisualElement floatContainer = root.Children().ElementAt(i);
             var floatFields = floatContainer.Query<FloatField>().ToList();
             
             Vector3 pos = Vector3.zero;
