@@ -6,7 +6,8 @@ using UnityEngine.UIElements;
 public class UiManager : MonoBehaviour
 {
     public List<GameObject> Prefabs = new List<GameObject>();
-    public VisualTreeAsset template;
+    public VisualTreeAsset btnTemplate;
+    public VisualTreeAsset inspectorTemplate;
     private GameObject selectedObject = null;
     private GameObject lastInspectedObject = null;
 
@@ -30,7 +31,7 @@ public class UiManager : MonoBehaviour
         inspectorContainer = root.Q<VisualElement>("inspector");
         listView = root.Q<ListView>("prefabList");
 
-        listView.makeItem = () => template.Instantiate();
+        listView.makeItem = () => btnTemplate.Instantiate();
         listView.bindItem = (element, i) =>
         {
             var button = element.Q<Button>("btn");
@@ -56,22 +57,26 @@ public class UiManager : MonoBehaviour
         listView.itemsSource = Prefabs;
         listView.fixedItemHeight = 70f;
         listView.RefreshItems();
+        inspectorContainer.style.display = DisplayStyle.None;
     }
 
     void Update()
     {
         if (selectedObject != null)
-            ManageBasicInspector(selectedObject);
+            ManageBasicInspector(selectedObject); 
     }
 
     void ManageBasicInspector(GameObject selected)
     {
         if (lastInspectedObject == selected) return;
-        lastInspectedObject = selected;
-
+        lastInspectedObject = selected; 
+        var clonedRoot = inspectorTemplate.CloneTree();
+        inspectorContainer.Clear();
+        inspectorContainer.Add(clonedRoot);  
         Label objNameLabel = inspectorContainer.Q<Label>("objName");
         objNameLabel.text = selected.name;
-
+        
+        Debug.Log(inspectorContainer.Children().ToList().Count);
         for (int i = 1; i < 4; i++)
         {
             VisualElement floatContainer = inspectorContainer.Children().ElementAt(i);
@@ -92,11 +97,7 @@ public class UiManager : MonoBehaviour
             int transformMode = i; 
             for (int j = 0; j < 3; j++)
             {
-                floatFields[j].RegisterValueChangedCallback(evt =>
-                {
-                    Vector3 newVal = GetVectorFromFields(floatFields);
-                    ApplyTransform(selected, transformMode, newVal);
-                });
+                RegisterFieldCallback(floatFields[j], selected, transformMode, floatFields);
             }
         }
     }
@@ -121,9 +122,20 @@ public class UiManager : MonoBehaviour
                 break;
         }
     }
+    
+    void RegisterFieldCallback(FloatField field, GameObject targetObject, int mode, List<FloatField> fields)
+    {
+        field.RegisterValueChangedCallback(evt =>
+        {
+            Vector3 newValue = GetVectorFromFields(fields);
+            ApplyTransform(targetObject, mode, newValue);
+        });
+    }
+
 
     public void SetSelectableObject(GameObject obj)
     {
         selectedObject = obj;
+        inspectorContainer.style.display = (selectedObject != null) ? DisplayStyle.Flex : DisplayStyle.None;
     }
 }

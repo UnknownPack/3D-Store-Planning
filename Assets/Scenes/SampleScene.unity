@@ -437,7 +437,8 @@ MonoBehaviour:
   - {fileID: 2323484494298988154, guid: 08ee1fb798b57a742aa3690ddc97e619, type: 3}
   - {fileID: 7465229221026499161, guid: 124dca5158ff4d44b9539b84ab78e081, type: 3}
   - {fileID: 5392079342188924301, guid: da8309cacf5cd0640a97ec032f1fe300, type: 3}
-  template: {fileID: 9197481963319205126, guid: bc6fa3a7d720f8448b3ade5b860a42df, type: 3}
+  btnTemplate: {fileID: 9197481963319205126, guid: bc6fa3a7d720f8448b3ade5b860a42df, type: 3}
+  inspectorTemplate: {fileID: 9197481963319205126, guid: 3ea6b1992858b714d96f1e65a0585ac6, type: 3}
 --- !u!114 &330585551
 MonoBehaviour:
   m_ObjectHideFlags: 0

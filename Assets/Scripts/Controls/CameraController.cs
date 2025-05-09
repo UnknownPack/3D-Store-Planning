@@ -76,8 +76,10 @@ public class CameraController : MonoBehaviour
     void ManageCameraMovement()
     {
         
-        Vector3 panMovement = new Vector3(panInput.x, 0, panInput.y) * moveSpeed * Time.deltaTime;
-        transform.position += panMovement;
+        Vector3 panDirection = new Vector3(panInput.x, 0f, panInput.y);
+        Vector3 rotatedPan = Quaternion.Euler(0f, currentYaw, 0f) * panDirection;
+        transform.position += rotatedPan * moveSpeed * Time.deltaTime;
+
         
         Vector3 heightMovement = new Vector3(0, heightInput.y, 0) * moveSpeed * Time.deltaTime;
         transform.position += heightMovement; 

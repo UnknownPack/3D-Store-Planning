@@ -10,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controls/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controls/CameraController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UiManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/ScreenUI.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/ScreenUI.uxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/template.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/template.uxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,21 +19,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "UnknownPack"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;UnknownPack&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/UnknownPack/3D-Store-Planning.git&quot;,
     &quot;accountId&quot;: &quot;b2e400cd-32af-45bf-80d6-d58f30d792de&quot;
   }
 }</component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2wq9JfsIgAhts5tOjnewY6IKPfZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -44,7 +43,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Dev-Branch/User-Interface",
+    "git-widget-placeholder": "Dev-Branch/Controls",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -105,6 +104,7 @@
       <option name="presentableId" value="Default" />
       <updated>1746758167616</updated>
       <workItem from="1746758169403" duration="4558000" />
+      <workItem from="1746796126577" duration="3898000" />
     </task>
     <servers />
   </component>
