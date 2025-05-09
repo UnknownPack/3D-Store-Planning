@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float incrament  = 1f;
     [SerializeField] private LayerMask floorlayer;
     [SerializeField] public Material highlightMaterial;
+    [SerializeField] public Material highlight_LockMaterial;
 
     private PlayerInput playerInput;
     UiManager uiManager;
@@ -126,13 +128,14 @@ public class CameraController : MonoBehaviour
                     copy = currentSelectedObject_MeshRenderer.material;
                     currentSelectedObject_MeshRenderer.material = highlightMaterial;
                 }
-                else
+                else if(!bObjectManipulation && !hit.collider.CompareTag("Movable"))
                 {
                     if (currentSelectedObject_MeshRenderer != null)
                         currentSelectedObject_MeshRenderer.material = copy;
                     uiManager.SetSelectableObject(null);
                     currentSelectedObject = null;
                     draggingGameObject = false;
+                    bObjectManipulation = false;
                 }
             }
         }
@@ -158,6 +161,7 @@ public class CameraController : MonoBehaviour
                 currentSelectedObject_MeshRenderer.material = copy;
             currentSelectedObject = null;
             draggingGameObject = false;
+            bObjectManipulation = false;
         }
     }
 
@@ -165,20 +169,21 @@ public class CameraController : MonoBehaviour
     void ManageSelectedObject()
     {
         if (currentSelectedObject == null)
-            return;  
-        
+            return;
+
         if(bObjectManipulation)
             currentSelectedObject.transform.Rotate(Vector3.up, rotateInput.x * incrament, Space.World);
         
         if (Input.GetKeyDown(KeyCode.R))
-        {
             currentSelectedObject.transform.rotation = Quaternion.identity;
-        }
 
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
+            Instantiate(currentSelectedObject, 
+                new Vector3(currentMousePositionToWorld.x, currentSelectedObject.transform.localScale.y / 2, currentMousePositionToWorld.z), 
+                currentSelectedObject.transform.rotation);
+        
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            if (currentSelectedObject_MeshRenderer != null)
-                currentSelectedObject_MeshRenderer.material = copy;
             uiManager.SetSelectableObject(null);
             Destroy(currentSelectedObject);
             currentSelectedObject = null;

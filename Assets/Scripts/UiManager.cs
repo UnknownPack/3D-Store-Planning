@@ -54,8 +54,7 @@ public class UiManager : MonoBehaviour
                     potentialGameObject_Material = potentialGameObject_MeshRenderer.material;
                     potentialGameObject_MeshRenderer.material = cameraController.highlightMaterial;
                     inPlacementMode = true;
-                    cameraController.SetPlacementMode(true);
-                    //cameraController.SetSelectedObject(newGameObject);
+                    cameraController.SetPlacementMode(true); 
                 } 
             };
         };
@@ -84,24 +83,23 @@ public class UiManager : MonoBehaviour
                 }
             }
         }
-        if (selectedObject != null)
+        if(selectedObject!=null)
             ManageBasicInspector(selectedObject); 
     }
 
     void ManageBasicInspector(GameObject selected)
     {
         if (lastInspectedObject == selected) return;
+        
         lastInspectedObject = selected; 
-        var clonedRoot = inspectorTemplate.CloneTree();
         inspectorContainer.Clear();
-        inspectorContainer.Add(clonedRoot);  
-        Label objNameLabel = inspectorContainer.Q<Label>("objName");
-        objNameLabel.text = selected.name;
-        var root = inspectorContainer.Q("ins");
-        Debug.Log(inspectorContainer.Children().ToList().Count);
+        inspectorContainer.Add(inspectorTemplate.CloneTree());
+        var inspectorRoot = root.Q<VisualElement>("ins");
+        string cleanedName = selected.name.Replace("(Clone)", "").Trim();
+        inspectorRoot.Q<Label>("objName").text = cleanedName;
         for (int i = 1; i < 4; i++)
         {
-            VisualElement floatContainer = root.Children().ElementAt(i);
+            VisualElement floatContainer = inspectorRoot.Children().ElementAt(i);
             var floatFields = floatContainer.Query<FloatField>().ToList();
             
             Vector3 pos = Vector3.zero;

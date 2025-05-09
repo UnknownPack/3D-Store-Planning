@@ -6,16 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f2c7b478-c882-45ae-84a8-d7269491ea44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.3D-Store-Planning/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.3D-Store-Planning/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/Highlights.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Highlights.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Store Components/Bin.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Store Components/Bin.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Store Components/ItemBase.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Store Components/ItemBase.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controls/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controls/CameraController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UiManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/inspectorTemplate.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/inspectorTemplate.uxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +33,10 @@
     &quot;accountId&quot;: &quot;b2e400cd-32af-45bf-80d6-d58f30d792de&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Prefabs_MetaData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SaveManager.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -114,7 +114,7 @@
       <updated>1746758167616</updated>
       <workItem from="1746758169403" duration="4558000" />
       <workItem from="1746796126577" duration="3898000" />
-      <workItem from="1746803198912" duration="3689000" />
+      <workItem from="1746803198912" duration="7604000" />
     </task>
     <servers />
   </component>
