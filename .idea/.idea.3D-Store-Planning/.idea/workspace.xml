@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f2c7b478-c882-45ae-84a8-d7269491ea44" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.3D-Store-Planning/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.3D-Store-Planning/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Store Components/Bin.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Store Components/Bin.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Store Components/ItemBase.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Store Components/ItemBase.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controls/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controls/CameraController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UiManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UiManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/inspectorTemplate.uxml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/User Interface/Ui Documents/inspectorTemplate.uxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +45,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Dev-Branch/Controls",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
