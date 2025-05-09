@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private LayerMask floorlayer;
 
     private PlayerInput playerInput;
+    UiManager uiManager;
     
     #region Camera-related fields
     
@@ -28,11 +29,12 @@ public class CameraController : MonoBehaviour
         private Vector3 currentMousePositionToWorld;
         private bool bObjectManipulation = false, bIncramentalChange = false, draggingGameObject = false;
     #endregion
-
+ 
 
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        uiManager = GetComponent<UiManager>();
 
         #region Camera-related initalizations
             panAction = playerInput.actions["Pan"];
@@ -111,10 +113,12 @@ public class CameraController : MonoBehaviour
                 if (hit.collider.CompareTag("Movable"))
                 {
                     currentSelectedObject = hit.collider.gameObject;
+                    uiManager.SetSelectableObject(hit.collider.gameObject);
                     draggingGameObject = true;  
                 }
                 else
                 {
+                    uiManager.SetSelectableObject(null);
                     currentSelectedObject = null;
                     draggingGameObject = false;
                 }
@@ -154,8 +158,18 @@ public class CameraController : MonoBehaviour
             {
                 currentSelectedObject.transform.rotation = Quaternion.identity;
             }
+
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.V))
+            {
+                //Instantiate()
+            }
         }
             
     }
+    public GameObject CurrentSelectedObject { get { return currentSelectedObject; } }
+    public LayerMask GetFloorMask(){return floorlayer;}
+    public void SetSelectedObject(GameObject obj){currentSelectedObject = obj;}
+ 
 }
+
 
