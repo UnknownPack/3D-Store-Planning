@@ -13,7 +13,7 @@ How to Use
 	- After selecting a component you can:
 		- Press 'Left Shift' after selecting a component to enter 'manipulation' mode, which allows you to use 'Q' or 'E' to rotate the component.
 		- Hold 'Control' and Press 'V' to instantiate another copy of the selected component.
-		- Press 'Delete' to remove and destroy the selected component.
+		- Press 'Space' to remove and destroy the selected component.
 
 - Either click on the floor, a different object or press right click to de-select
   

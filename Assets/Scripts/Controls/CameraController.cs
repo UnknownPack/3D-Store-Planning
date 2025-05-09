@@ -171,7 +171,17 @@ public class CameraController : MonoBehaviour
             return;
 
         if(bObjectManipulation)
+        {
             currentSelectedObject.transform.Rotate(Vector3.up, rotateInput.x * incrament, Space.World);
+            
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                uiManager.SetSelectableObject(null);
+                Destroy(currentSelectedObject);
+                currentSelectedObject = null;
+                draggingGameObject = false;
+            }
+        }
         
         if (Input.GetKeyDown(KeyCode.R))
             currentSelectedObject.transform.rotation = Quaternion.identity;
@@ -180,14 +190,6 @@ public class CameraController : MonoBehaviour
             Instantiate(currentSelectedObject, 
                 new Vector3(currentMousePositionToWorld.x, currentSelectedObject.transform.localScale.y / 2, currentMousePositionToWorld.z), 
                 currentSelectedObject.transform.rotation);
-        
-        if (Input.GetKeyDown(KeyCode.Delete))
-        {
-            uiManager.SetSelectableObject(null);
-            Destroy(currentSelectedObject);
-            currentSelectedObject = null;
-            draggingGameObject = false;
-        }
     }
 
     #region Public Methods
