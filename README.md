@@ -1,6 +1,7 @@
 3D Supermarket Planner
 -----------------------------------------------------------------------------------
 WebGL Build: https://unknownpack.itch.io/3d-store-planning
+Password: Planoverse
 -----------------------------------------------------------------------------------
 
 How to Use
