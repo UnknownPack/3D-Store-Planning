@@ -30,39 +30,42 @@ public class UiManager : MonoBehaviour
 
         root = uiDocument.rootVisualElement;
         inspectorContainer = root.Q<VisualElement>("inspector");
-        listView = root.Q<ListView>("prefabList");
 
-        listView.makeItem = () => btnTemplate.Instantiate();
-        listView.bindItem = (element, i) =>
-        {
-            var button = element.Q<Button>("btn");
-            button.text = Prefabs[i].gameObject.name;
-            button.clicked += () =>
+        #region ListView initalisation
+            listView = root.Q<ListView>("prefabList");
+            listView.makeItem = () => btnTemplate.Instantiate();
+            listView.bindItem = (element, i) =>
             {
-                if (cameraController == null)
+                var button = element.Q<Button>("btn");
+                button.text = Prefabs[i].gameObject.name;
+                button.clicked += () =>
                 {
-                    Debug.LogError("cameraController is null");
-                    return;
-                }
-                Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f);
-                Ray ray = Camera.main.ScreenPointToRay(screenCenter);
+                    if (cameraController == null)
+                    {
+                        Debug.LogError("cameraController is null");
+                        return;
+                    }
+                    Vector3 screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f);
+                    Ray ray = Camera.main.ScreenPointToRay(screenCenter);
 
-                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, cameraController.GetFloorMask()))
-                {
-                    potentialGameObject = Instantiate(Prefabs[i], hit.point, Quaternion.identity);
-                    potentialGameObject_MeshRenderer = potentialGameObject.GetComponent<MeshRenderer>();
-                    potentialGameObject_Material = potentialGameObject_MeshRenderer.material;
-                    potentialGameObject_MeshRenderer.material = cameraController.highlightMaterial;
-                    inPlacementMode = true;
-                    cameraController.SetPlacementMode(true); 
-                } 
+                    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, cameraController.GetFloorMask()))
+                    {
+                        potentialGameObject = Instantiate(Prefabs[i], hit.point, Quaternion.identity);
+                        potentialGameObject_MeshRenderer = potentialGameObject.GetComponent<MeshRenderer>();
+                        potentialGameObject_Material = potentialGameObject_MeshRenderer.material;
+                        potentialGameObject_MeshRenderer.material = cameraController.highlightMaterial;
+                        inPlacementMode = true;
+                        cameraController.SetPlacementMode(true); 
+                    } 
+                };
             };
-        };
 
-        listView.itemsSource = Prefabs;
-        listView.fixedItemHeight = 70f;
-        listView.RefreshItems();
-        inspectorContainer.style.display = DisplayStyle.None;
+            listView.itemsSource = Prefabs;
+            listView.fixedItemHeight = 70f;
+            listView.RefreshItems();
+            inspectorContainer.style.display = DisplayStyle.None;
+        #endregion
+ 
     }
 
     void Update()
@@ -122,6 +125,8 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    #region Helper Functions
+        
     Vector3 GetVectorFromFields(List<FloatField> fields)
     {
         return new Vector3(fields[0].value, fields[1].value, fields[2].value);
@@ -151,8 +156,10 @@ public class UiManager : MonoBehaviour
             ApplyTransform(targetObject, mode, newValue);
         });
     }
+    
 
-
+        #endregion
+ 
     public void SetSelectableObject(GameObject obj)
     {
         selectedObject = obj;

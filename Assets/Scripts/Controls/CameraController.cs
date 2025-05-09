@@ -80,7 +80,6 @@ public class CameraController : MonoBehaviour
 
     void ManageCameraMovement()
     {
-        
         Vector3 panDirection = new Vector3(panInput.x, 0f, panInput.y);
         Vector3 rotatedPan = Quaternion.Euler(0f, currentYaw, 0f) * panDirection;
         transform.position += rotatedPan * moveSpeed * Time.deltaTime;
@@ -92,7 +91,7 @@ public class CameraController : MonoBehaviour
         Vector3 zoomMovement = transform.forward * (zoomInput * zoomSpeed * Time.deltaTime);
         transform.position += zoomMovement;
         
-        // rotation management
+        // if user is in object manipulation mode, they can use rotate keys to rotate object instead of camera
         if(!bObjectManipulation)
         {
             currentPitch -= rotateInput.y * rotateSpeed * Time.deltaTime;
@@ -111,8 +110,10 @@ public class CameraController : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * floorHit.distance, Color.green);
         }
 
+        // terminate function early if in different mode
         if(placementMode)
             return;
+        
         // select object
         if (Input.GetMouseButtonDown(0))
         {
@@ -142,9 +143,7 @@ public class CameraController : MonoBehaviour
 
         // drag object if left mouse held down
         if (Input.GetMouseButton(0) && draggingGameObject && currentSelectedObject != null)
-        {
             currentSelectedObject.transform.position = new Vector3(currentMousePositionToWorld.x, currentSelectedObject.transform.localScale.y / 2, currentMousePositionToWorld.z);
-        }
 
         // On release of left mouse, stop dragging
         if (Input.GetMouseButtonUp(0))
@@ -190,11 +189,14 @@ public class CameraController : MonoBehaviour
             draggingGameObject = false;
         }
     }
-    public GameObject CurrentSelectedObject { get { return currentSelectedObject; } }
-    public LayerMask GetFloorMask(){return floorlayer;}
-    public void SetSelectedObject(GameObject obj){currentSelectedObject = obj;}
 
-    public void SetPlacementMode(bool mode){placementMode = mode;}
+    #region Public Methods
+        public GameObject CurrentSelectedObject { get { return currentSelectedObject; } }
+        public LayerMask GetFloorMask(){return floorlayer;}
+        public void SetSelectedObject(GameObject obj){currentSelectedObject = obj;}
+        public void SetPlacementMode(bool mode){placementMode = mode;}
+    #endregion
+
 
 }
 
